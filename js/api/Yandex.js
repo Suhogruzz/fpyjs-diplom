@@ -22,10 +22,16 @@ class Yandex {
    */
   static uploadFile(path, url, callback){
     try {
-      createRequest(`${this.HOST}/resources/upload/?path=${path}&url=${url}`, {
+      createRequest({
         method: 'POST',
-        headers: {'Authorization': `OAuth ${this.getToken()}`},
-      }, callback);
+        url: `${this.HOST}/resources/upload`,
+        data: {
+          'path': path,
+          'url': url,
+        },
+        headers: {'Authorization': `OAuth ${Yandex.getToken()}`},
+        callback: callback,
+      });
       console.log(path, url)
     }
     catch (e) {
@@ -37,11 +43,17 @@ class Yandex {
    * Метод удаления файла из облака
    */
   static removeFile(path, callback){
+
     try {
-      createRequest(`${this.HOST}/resources/?path=${path}`, {
+      createRequest({
         method: 'DELETE',
-        headers: {'Authorization': `OAuth ${this.getToken()}`},
-      }, callback);
+        url: `${this.HOST}/resources`,
+        data: {
+          'path': path,
+        },
+        headers: {'Authorization': `OAuth ${Yandex.getToken()}`},
+        callback: callback,
+      });
     }
     catch (e) {
       alert('Ошибка' + e.name + ':' + e.message);
@@ -53,10 +65,12 @@ class Yandex {
    */
   static getUploadedFiles(callback){
     try {
-      createRequest(`${this.HOST}/resources/files`, {
+      createRequest({
         method: 'GET',
-        headers: {'Authorization': `OAuth ${this.getToken()}`},
-      }, callback);
+        url: `${this.HOST}/resources/files`,
+        headers: {'Authorization': `OAuth ${Yandex.getToken()}`},
+        callback: callback,
+      });
     }
     catch (e) {
       alert('Ошибка' + e.name + ':' + e.message);

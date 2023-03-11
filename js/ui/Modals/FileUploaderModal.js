@@ -91,10 +91,10 @@ class FileUploaderModal extends BaseModal {
       imageContainer.querySelector('.input').classList.add('error');
       return;
     };
-    imageContainer.querySelector('.input').classList.add('disabled');
+    imageContainer.querySelector('input').classList.add('disabled');
     Yandex.uploadFile(path, url, (err) => {
       if (err === false) {
-        imageContainer.querySelector('.input').classList.remove('disabled');
+        imageContainer.querySelector('input').classList.remove('disabled');
         imageContainer.querySelector('input').value = '';
       } else {
         console.log('Error')
