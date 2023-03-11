@@ -4,7 +4,8 @@
  * */
 class SearchBlock {
   constructor( element ) {
-
+    this.element = element;
+    this.registerEvents();
   }
 
   /**
@@ -13,7 +14,23 @@ class SearchBlock {
    * только клик по кнопке "Заменить" перед отрисовкой очищает все отрисованные ранее изображения
    */
   registerEvents(){
-
+    let searchBlock = document.querySelector('.search-block');
+    searchBlock.onclick = (e) => {
+      let input = document.querySelector('input');
+      if (e.target == document.querySelector('.add') || e.target == document.querySelector('.replace')) {
+        if (input.value.trim() != '') {
+          if (e.target == document.querySelector('.replace')) {
+            App.imageViewer.clear();
+          } else {
+            try {
+              VK.get(input.value, App.imageViewer.drawImages);
+            }
+            catch (e) {
+              alert(`Ошибка ${e.name}: ${e.message}`);
+            }
+          }
+        }
+      }
+    }
   }
-
 }
