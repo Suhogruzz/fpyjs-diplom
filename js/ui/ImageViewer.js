@@ -100,7 +100,7 @@ class ImageViewer {
     } else {
       selectAll.textContent = 'Выбрать все';
     }
-    if (allImages.length > 0) {
+    if (activeImages.length > 0) {
       send.classList.remove('disabled');
     } else {
       send.classList.add('disabled');
